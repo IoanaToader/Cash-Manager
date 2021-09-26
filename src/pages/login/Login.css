@@ -1,0 +1,38 @@
+.login {
+  text-align: center;
+  font-family: "Scheherazade New", serif;
+}
+.login h1 {
+  color: #1d3924;
+}
+
+.login_app ul {
+  list-style: none;
+  max-width: 300px;
+  margin: auto;
+}
+
+.login_app ul li {
+  border: 1px solid #a5bcac66;
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 6px;
+  box-shadow: 0 2px 4px rgb(106 116 110 / 25%);
+  border-radius: 5px;
+  text-align: left;
+}
+
+.login_app ul li a {
+  text-decoration: none;
+  color: #033310;
+}
+.login_app ul li a img {
+  width: 24px;
+  margin-right: 20px;
+}
+
+#login_paragraph {
+  color: #beb9b9eb;
+  margin-top: -5px;
+  margin-right: -20px;
+}
