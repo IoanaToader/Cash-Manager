@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
-import "./LoginForm.css";
 
-const LoginForm = (props) => {
+const SignUpForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,22 +30,18 @@ const LoginForm = (props) => {
           placeholder="Password"
           onChange={passwordHandlerChange}
         ></input>
+        <input type="password" placeholder="Confirm Password"></input>
+        <input type="text" placeholder="Email"></input>
         <button
           className="login_button"
           type="submit"
           onClick={submitHandlerClick}
         >
-          LOGIN
+          SIGN UP
         </button>
       </form>
-      <p>
-        <a href="/sign-up">Sign up</a>
-      </p>
-      <p>
-        <a href="/forgot-password"> Forgot your password?</a>
-      </p>
     </div>
   );
 };
 
-export default withRouter(LoginForm);
+export default withRouter(SignUpForm);
