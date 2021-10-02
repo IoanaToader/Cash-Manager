@@ -24,7 +24,7 @@
   padding: 6px;
   border-radius: 5px;
   border-color: #a5bcac66;
-  background-color: #38a454;
+  background-color: #1a9a3b;
   color: white;
   cursor: pointer;
 }
@@ -35,4 +35,18 @@
 .login_form p a {
   color: #38a454;
   text-decoration: none;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.login_form .login_form_elements .input-error {
+  border: 1px solid #e94f4f;
+  box-shadow: -1px 1px 10px -3px #f30c0c;
+  border-radius: 5px;
+}
+.login_form .login_form_elements .input-error:focus {
+  box-shadow: none;
 }

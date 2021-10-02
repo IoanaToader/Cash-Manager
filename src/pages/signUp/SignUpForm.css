@@ -1,0 +1,8 @@
+.login_form .login_form_elements .input-error {
+  border: 1px solid #e94f4f;
+  box-shadow: -1px 1px 10px -3px #f30c0c;
+  border-radius: 5px;
+}
+.login_form .login_form_elements .input-error:focus {
+  box-shadow: none;
+}

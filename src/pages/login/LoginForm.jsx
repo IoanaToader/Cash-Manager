@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { withRouter } from "react-router";
+import { UserContext } from "../../contexts/UserContext";
 import "./LoginForm.css";
 
 const LoginForm = (props) => {
-  const [username, setUsername] = useState("");
+  const userContext = useContext(UserContext);
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const usernameHandlerChange = (event) => {
-    setUsername(event.target.value);
+  const emailHandlerChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const passwordHandlerChange = (event) => {
@@ -16,17 +19,25 @@ const LoginForm = (props) => {
 
   const submitHandlerClick = (event) => {
     event.preventDefault();
-    props.history.push("/");
+    userContext.methods.login(email, password);
   };
   return (
     <div className="login_form">
       <form className="login_form_elements">
         <input
-          type="text"
-          placeholder="Username"
-          onChange={usernameHandlerChange}
+          className={`${
+            userContext.data.loginErrorMessage ? "input-error" : ""
+          }`}
+          value={email}
+          type="email"
+          placeholder="Email"
+          onChange={emailHandlerChange}
         ></input>
         <input
+          className={`${
+            userContext.data.loginErrorMessage ? "input-error" : ""
+          }`}
+          value={password}
           type="password"
           placeholder="Password"
           onChange={passwordHandlerChange}
@@ -39,6 +50,12 @@ const LoginForm = (props) => {
           LOGIN
         </button>
       </form>
+
+      {userContext.data.loginErrorMessage !== "" && (
+        <div className="error-message">
+          {userContext.data.loginErrorMessage}
+        </div>
+      )}
       <p>
         <a href="/sign-up">Sign up</a>
       </p>
