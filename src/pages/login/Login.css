@@ -1,6 +1,7 @@
 .login {
   text-align: center;
-  font-family: "Scheherazade New", serif;
+  font-family: "Eczar", serif;
+  font-size: 13px;
 }
 .login h1 {
   color: #1d3924;
@@ -41,7 +42,7 @@
 
 #login_paragraph {
   color: #beb9b9eb;
-  padding-left: 1.8rem;
+  padding-left: 0.8rem;
 }
 
 @media only screen and (max-width: 768px) {
