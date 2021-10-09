@@ -7,12 +7,16 @@
   margin-right: 2rem;
 }
 .accounts-item-li {
+  color: white;
   list-style-type: none;
   border-radius: 5px;
   padding: 6px;
-  margin-top: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0px 2px 4px 1px rgb(186 186 186 / 29%);
+  margin: auto;
+  margin-top: 1rem;
+  width: 70%;
+  font-family: "Karma", serif;
 }
 
 .accounts-item-button {
@@ -23,4 +27,14 @@
   background-color: #1a9a3b;
   color: white;
   cursor: pointer;
+  margin-top: 2rem;
+}
+
+.account-type {
+  font-size: 23px;
+}
+.account-amount-currency {
+}
+
+.account-img {
 }

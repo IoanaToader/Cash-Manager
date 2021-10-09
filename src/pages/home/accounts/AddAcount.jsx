@@ -3,15 +3,11 @@ import React, { useContext, useState } from "react";
 import "./AddAccount.css";
 
 const AddAccount = (props) => {
-  const [accountName, setAccountName] = useState("");
   const [accountType, setAccountType] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [currency, setCurrency] = useState("");
   const [color, setColor] = useState("");
 
-  const accountNameChangeHandler = (event) => {
-    setAccountName(event.target.value);
-  };
   const accountTypeChangeHandler = (event) => {
     setAccountType(event.target.value);
   };
@@ -30,14 +26,13 @@ const AddAccount = (props) => {
     event.preventDefault();
 
     const addAccountData = {
-      accountName: accountName,
       accountType: accountType,
       amount: enteredAmount,
       currency: currency,
       color: color,
     };
     props.onAddAccount(addAccountData);
-    setAccountName("");
+
     setAccountType("");
     setEnteredAmount("");
     setCurrency("");
@@ -66,16 +61,7 @@ const AddAccount = (props) => {
         </nav>
         <form onSubmit={submitHandler}>
           <div className="add-account-form form-group">
-            <label>Account name</label>
-            <input
-              value={accountName}
-              onChange={accountNameChangeHandler}
-              type="text"
-              className="form-control"
-            />
-          </div>
-          <div className="add-account-form form-group">
-            <label>Account type</label>
+            <label>Account type: *</label>
             <div className="add-account-form form-group">
               <select
                 value={accountType}
@@ -84,15 +70,15 @@ const AddAccount = (props) => {
                 id="inlineFormCustomSelect"
               >
                 <option selected>Choose...</option>
-                <option value="1">Cash</option>
-                <option value="2">Visa</option>
-                <option value="3">MasterCard</option>
-                <option value="4">Credit Card</option>
+                <option value="Cash">Cash</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Credit Card">Credit Card</option>
               </select>
             </div>
           </div>
           <div className="add-account-form form-group">
-            <label>Enter the amount</label>
+            <label>Enter the amount: *</label>
             <input
               value={enteredAmount}
               onChange={enteredAmountChangeHandler}
@@ -101,36 +87,62 @@ const AddAccount = (props) => {
             />
           </div>
           <div className="add-account-form form-group">
-            <label>Currency</label>
+            <label>Currency: *</label>
             <div className="add-account-form form-group">
               <select
-                value={color}
+                value={currency}
                 onChange={currencyChangeHandler}
                 class="custom-select mr-sm-2"
                 id="inlineFormCustomSelect"
               >
                 <option selected>Choose...</option>
-                <option value="1">RON</option>
-                <option value="2">EUR</option>
-                <option value="3">GBP</option>
-                <option value="4">USD</option>
-                <option value="5">HUF</option>
+                <option value="RON">RON</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="HUF">HUF</option>
               </select>
             </div>
           </div>
           <div className="add-account-form form-group">
-            <label>Color</label>
+            <label>Color: *</label>
             <div className="add-account-form form-group">
               <select
                 value={color}
+                style={{ backgroundColor: color }}
                 onChange={colorChangeHandler}
                 class="custom-select mr-sm-2"
                 id="inlineFormCustomSelect"
               >
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option
+                  value="#86db94"
+                  style={{ backgroundColor: "#86db94" }}
+                ></option>
+
+                <option
+                  value="#f5c542"
+                  style={{ backgroundColor: "#f5c542" }}
+                ></option>
+                <option
+                  value="#f58b3b"
+                  style={{ backgroundColor: "#f58b3b" }}
+                ></option>
+                <option
+                  value="#098227"
+                  style={{ backgroundColor: "#098227" }}
+                ></option>
+                <option
+                  value="#618bed"
+                  style={{ backgroundColor: "#618bed" }}
+                ></option>
+                <option
+                  value="#b767f0"
+                  style={{ backgroundColor: "#b767f0" }}
+                ></option>
+                <option
+                  value="#f26b5a"
+                  style={{ backgroundColor: "#f26b5a" }}
+                ></option>
               </select>
             </div>
           </div>

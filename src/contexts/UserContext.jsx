@@ -12,6 +12,7 @@ const UserContextProvider = (props) => {
     signUpUsernameErrorMessage: "",
     signUpEmailErrorMessage: "",
     accounts: [],
+    mobileClick: false,
   });
 
   const login = (email, password) => {
@@ -72,11 +73,31 @@ const UserContextProvider = (props) => {
     setValue({ ...value, accounts: [...value.accounts, account] });
   };
 
+  const removeAccount = (account) => {
+    const newAccounts = value.accounts;
+
+    const indexOfAccount = newAccounts.indexOf(account);
+
+    if (indexOfAccount > -1) {
+      newAccounts.splice(indexOfAccount, 1);
+      setValue({ ...value, accounts: newAccounts });
+    }
+  };
+
+  const toggleMobileNavbar = () => {
+    setValue(!value);
+  };
   return (
     <UserContext.Provider
       value={{
         data: value,
-        methods: { login, signUp, addAccount },
+        methods: {
+          login,
+          signUp,
+          addAccount,
+          removeAccount,
+          toggleMobileNavbar,
+        },
       }}
     >
       {props.children}
