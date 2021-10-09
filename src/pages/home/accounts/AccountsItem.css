@@ -1,0 +1,26 @@
+.accounts-item-full-page {
+  height: 100%;
+  width: 100%;
+}
+
+.accounts-item-ul {
+  margin-right: 2rem;
+}
+.accounts-item-li {
+  list-style-type: none;
+  border-radius: 5px;
+  padding: 6px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0px 2px 4px 1px rgb(186 186 186 / 29%);
+}
+
+.accounts-item-button {
+  margin-bottom: 10px;
+  padding: 6px;
+  border-radius: 5px;
+  border-color: #a5bcac66;
+  background-color: #1a9a3b;
+  color: white;
+  cursor: pointer;
+}

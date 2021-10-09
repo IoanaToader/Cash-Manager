@@ -1,11 +1,15 @@
 .login {
   text-align: center;
-  font-family: "Eczar", serif;
+  font-family: "Karma", serif;
+  height: 100%;
+  width: 100%;
+  padding: 70px;
   font-size: 13px;
 }
 .login h1 {
   color: #1d3924;
   margin-top: 0;
+  margin-bottom: 2rem;
 }
 
 .login_app {

@@ -5,7 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-document.getElementById("root").style.height = "100%";
 ReactDOM.render(
   <React.StrictMode>
     <App />
