@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
 
@@ -11,6 +11,7 @@ const UserContextProvider = (props) => {
     loginErrorMessage: "",
     signUpUsernameErrorMessage: "",
     signUpEmailErrorMessage: "",
+    accounts: [],
   });
 
   const login = (email, password) => {
@@ -67,11 +68,15 @@ const UserContextProvider = (props) => {
       });
   };
 
+  const addAccount = (account) => {
+    setValue({ ...value, accounts: [...value.accounts, account] });
+  };
+
   return (
     <UserContext.Provider
       value={{
         data: value,
-        methods: { login, signUp },
+        methods: { login, signUp, addAccount },
       }}
     >
       {props.children}

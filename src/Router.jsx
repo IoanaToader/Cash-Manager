@@ -4,10 +4,10 @@ import HomePage from "./pages/home/HomePage";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
-import AccountsItem from "./pages/home/navbarItems/AccountsItem";
-import CategoriesItem from "./pages/home/navbarItems/CategoriesItem";
-import OverviewItem from "./pages/home/navbarItems/OverviewItem";
-import AddExpenseItem from "./pages/home/navbarItems/OverviewItem";
+import AccountsItem from "./pages/home/accounts/AccountsItem";
+import CategoriesItem from "./pages/home/CategoriesItem";
+import OverviewItem from "./pages/home/OverviewItem";
+import AddExpenseItem from "./pages/home/OverviewItem";
 
 const Router = () => {
   return (
