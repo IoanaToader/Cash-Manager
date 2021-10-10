@@ -23,7 +23,7 @@ const Navbar = (props) => {
 
           {/* --------------------------------------------------- */}
 
-          <a className="navbar-brand" id="navbar-admin" href="#">
+          <a className="navbar-brand" id="navbar-admin" href="/">
             <img id="navbar-logo" src="/img/logo/logo_piggy.png" />
             Hello, {userContext.data.userDetails.username}
           </a>

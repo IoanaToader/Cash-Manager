@@ -4,7 +4,6 @@ import { UserContext } from "../../../contexts/UserContext";
 
 import "./AccountsItem.css";
 import AddAccount from "./AddAcount";
-import CommonNavbar from "../navbarItems/CommonNavbar";
 
 const AccountsItem = (props) => {
   const userContext = useContext(UserContext);
@@ -26,8 +25,6 @@ const AccountsItem = (props) => {
   return (
     <>
       <div className="accounts-item-full-page">
-        <CommonNavbar />
-
         <ul className="accounts-item-ul">
           {userContext.data.accounts.length === 0 && (
             <p>No accounts on your list, add some.</p>

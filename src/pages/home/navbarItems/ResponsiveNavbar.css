@@ -9,6 +9,9 @@
     position: absolute;
     top: 0;
     left: 0;
+    background-color: white;
+    margin-top: -10px;
+    padding-top: 10px;
   }
   .mobile-navbar-full-page .mobile-elements {
     display: block;

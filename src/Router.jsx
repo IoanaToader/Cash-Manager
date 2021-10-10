@@ -7,43 +7,51 @@ import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import AccountsItem from "./pages/home/accounts/AccountsItem";
 import CategoriesItem from "./pages/home/CategoriesItem";
 import OverviewItem from "./pages/home/OverviewItem";
-import AddExpenseItem from "./pages/home/OverviewItem";
+import AddExpenseItem from "./pages/home/AddExpenseItem";
+import Navbar from "./pages/home/navbarItems/Navbar";
 
 const Router = () => {
   return (
-    <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
+    <>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
 
-      <Route path="/sign-up">
-        <SignUp />
-      </Route>
+        <Route path="/sign-up">
+          <SignUp />
+        </Route>
 
-      <Route path="/forgot-password">
-        <ForgotPassword />
-      </Route>
+        <Route path="/forgot-password">
+          <ForgotPassword />
+        </Route>
 
-      <Route path="/accounts">
-        <AccountsItem />
-      </Route>
+        <Route path="/">
+          <Navbar />
+          <Switch>
+            <Route path="/accounts">
+              <AccountsItem />
+            </Route>
 
-      <Route path="/categories">
-        <CategoriesItem />
-      </Route>
+            <Route path="/categories">
+              <CategoriesItem />
+            </Route>
 
-      <Route path="/overview">
-        <OverviewItem />
-      </Route>
+            <Route path="/overview">
+              <OverviewItem />
+            </Route>
 
-      <Route path="/add-expense">
-        <AddExpenseItem />
-      </Route>
+            <Route path="/add-expense">
+              <AddExpenseItem />
+            </Route>
 
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
-    </Switch>
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
+          </Switch>
+        </Route>
+      </Switch>
+    </>
   );
 };
 

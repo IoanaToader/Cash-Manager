@@ -12,8 +12,23 @@ const UserContextProvider = (props) => {
     signUpUsernameErrorMessage: "",
     signUpEmailErrorMessage: "",
     accounts: [],
-    mobileClick: false,
   });
+
+  useEffect(() => {
+    if (
+      Object.keys(value.userDetails).length > 0 ||
+      value.accounts.length > 0
+    ) {
+      saveData();
+    }
+  }, [value]);
+
+  useEffect(() => {
+    let oldData = readData();
+    oldData = JSON.parse(oldData);
+    setValue(oldData);
+    console.log("oldData", oldData);
+  }, []);
 
   const login = (email, password) => {
     const dataSignIn = {
@@ -84,9 +99,14 @@ const UserContextProvider = (props) => {
     }
   };
 
-  const toggleMobileNavbar = () => {
-    setValue(!value);
+  const saveData = () => {
+    localStorage.setItem("contextData", JSON.stringify(value));
   };
+
+  const readData = () => {
+    return localStorage.getItem("contextData");
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -96,7 +116,6 @@ const UserContextProvider = (props) => {
           signUp,
           addAccount,
           removeAccount,
-          toggleMobileNavbar,
         },
       }}
     >
