@@ -52,15 +52,23 @@
 
   .mobile-full-home-page {
     width: 80%;
+    height: 100%;
   }
-
+  .mobile-elements {
+    background-color: #f2f7f5;
+  }
   .mobile-ul {
     list-style-type: none;
     font-family: "Karma", serif;
+    padding-left: 0;
+    background-color: white;
   }
 
   .mobile-item {
-    margin-top: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left, transparent, #ccc);
   }
 
   .mobile-link {
@@ -76,10 +84,5 @@
   #overlay {
     display: block;
     opacity: 1;
-  }
-  .hr-mobile-navbar {
-    height: 1px;
-    margin-left: -3rem;
-    background-image: linear-gradient(to right, transparent, #ccc);
   }
 }

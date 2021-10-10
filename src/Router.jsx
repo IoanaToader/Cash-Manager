@@ -5,7 +5,7 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import AccountsItem from "./pages/home/accounts/AccountsItem";
-import CategoriesItem from "./pages/home/CategoriesItem";
+import CategoriesItem from "./pages/home/categories/CategoriesItem";
 import OverviewItem from "./pages/home/OverviewItem";
 import AddExpenseItem from "./pages/home/AddExpenseItem";
 import Navbar from "./pages/home/navbarItems/Navbar";

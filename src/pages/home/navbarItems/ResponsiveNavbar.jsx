@@ -27,7 +27,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Home
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/accounts">
@@ -37,7 +36,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Accounts
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/categories">
@@ -47,7 +45,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Categories
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/overview">
@@ -57,7 +54,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Overview
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/overview">
@@ -67,7 +63,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Liability
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/overview">
@@ -77,7 +72,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Currency Convertor
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/overview">
@@ -87,7 +81,6 @@ const ResponsiveNavbar = (props) => {
                   />
                   Follow us!
                 </a>
-                <hr className="hr-mobile-navbar" />
               </li>
               <li className="mobile-item">
                 <a className="mobile-link" href="/login">

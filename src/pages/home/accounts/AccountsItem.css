@@ -38,3 +38,10 @@
 
 .account-img {
 }
+
+.remove-account {
+  display: flex;
+}
+
+.remove-account img {
+}

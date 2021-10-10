@@ -40,11 +40,13 @@ const AccountsItem = (props) => {
                   {account.amount}
                   {account.currency}
                 </div>
-                <img
-                  onClick={() => handleRemoveAccount(account)}
-                  className="account-img"
-                  src="/img/delete-icon.png"
-                />
+                <div className="remove-account">
+                  <img
+                    onClick={() => handleRemoveAccount(account)}
+                    className="account-img"
+                    src="/img/delete-icon.png"
+                  />
+                </div>
               </li>
             );
           })}

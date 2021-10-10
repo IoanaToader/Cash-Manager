@@ -1,12 +1,37 @@
 import React, { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react/cjs/react.development";
 import { UserContext } from "../../../contexts/UserContext";
 import "./Navbar.css";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
 const Navbar = (props) => {
   const userContext = useContext(UserContext);
-
   const [mobileClick, setMobileClick] = useState(false);
+  const [title, setTitle] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        setTitle(`Hello, ${userContext.data?.userDetails?.username ?? ""}`);
+        break;
+      case "/accounts":
+        setTitle("Accounts");
+        break;
+      case "/categories":
+        setTitle("Categories");
+        break;
+      case "/overview":
+        setTitle("Overview");
+        break;
+      case "/add-expense":
+        setTitle("Add expense");
+        break;
+      default:
+        break;
+    }
+  }, [location, userContext.data.userDetails.username]);
 
   const showMobileNavbar = () => {
     setMobileClick(!mobileClick);
@@ -23,10 +48,10 @@ const Navbar = (props) => {
 
           {/* --------------------------------------------------- */}
 
-          <a className="navbar-brand" id="navbar-admin" href="/">
-            <img id="navbar-logo" src="/img/logo/logo_piggy.png" />
-            Hello, {userContext.data.userDetails.username}
+          <a className="navbar-brand" href="/">
+            <img id="navbar-logo" src="/img/logo/logo_piggy.png" />{" "}
           </a>
+          <span id="navbar-title">{title}</span>
 
           {/* ----------------Navigation for mobile--------------------- */}
 

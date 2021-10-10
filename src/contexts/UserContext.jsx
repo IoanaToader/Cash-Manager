@@ -14,6 +14,7 @@ const UserContextProvider = (props) => {
     accounts: [],
   });
 
+  //--------------------------Asa salvam datele cand dam refresh la pagina---------------
   useEffect(() => {
     if (
       Object.keys(value.userDetails).length > 0 ||
@@ -29,6 +30,7 @@ const UserContextProvider = (props) => {
     setValue(oldData);
     console.log("oldData", oldData);
   }, []);
+  //--------------------------------------------pana aici---------------------------------
 
   const login = (email, password) => {
     const dataSignIn = {
@@ -90,7 +92,6 @@ const UserContextProvider = (props) => {
 
   const removeAccount = (account) => {
     const newAccounts = value.accounts;
-
     const indexOfAccount = newAccounts.indexOf(account);
 
     if (indexOfAccount > -1) {
@@ -99,10 +100,11 @@ const UserContextProvider = (props) => {
     }
   };
 
+  //---------------------Aici ne salvam datele-----------------------------
   const saveData = () => {
     localStorage.setItem("contextData", JSON.stringify(value));
   };
-
+  //---------------------Aici citim datele pe care le-am salvat mai sus-----
   const readData = () => {
     return localStorage.getItem("contextData");
   };
