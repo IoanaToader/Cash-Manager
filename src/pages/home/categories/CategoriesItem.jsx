@@ -2,16 +2,36 @@ import React, { useState } from "react";
 import { withRouter } from "react-router";
 import "./CategoriesItem.css";
 import Food from "./Food";
+import Shopping from "./Shopping";
 
 const CategoriesItem = (props) => {
   const [isFoodPageVisible, setFoodPageVisible] = useState(false);
+  const [isShoppingPageVisible, setShoppingPageVisible] = useState(false);
 
   const toggleFoodDrinksPage = () => {
     setFoodPageVisible(!isFoodPageVisible);
   };
+  const toggleShoppingPage = () => {
+    setShoppingPageVisible(!isShoppingPageVisible);
+  };
 
   return (
     <>
+      {isFoodPageVisible && (
+        <div
+          onClick={toggleFoodDrinksPage}
+          id="overlay"
+          style={{ width: "100%" }}
+        ></div>
+      )}
+      {isShoppingPageVisible && (
+        <div
+          onClick={toggleShoppingPage}
+          id="overlay"
+          style={{ width: "100%" }}
+        ></div>
+      )}
+
       <div className="categories-item-full-page">
         <div className="categories-item-navbar">
           <div className="categories-item-navbar-title">All Categories</div>
@@ -24,14 +44,16 @@ const CategoriesItem = (props) => {
               style={{ backgroundColor: "#eb4034" }}
             />
             Food and Drinks
+            {isFoodPageVisible && <Food />}
           </li>
-          {isFoodPageVisible && <Food />}
-          <li className="categories-item-li">
+
+          <li onClick={toggleShoppingPage} className="categories-item-li">
             <img
               src="/img/categories/shopping-icon.png"
               style={{ backgroundColor: "#349feb" }}
             />
             Shopping
+            {isShoppingPageVisible && <Shopping />}
           </li>
 
           <li className="categories-item-li">

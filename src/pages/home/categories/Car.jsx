@@ -1,7 +1,7 @@
 import React from "react";
 import "./Subcategories.css";
 
-const Food = (props) => {
+const Car = (props) => {
   return (
     <>
       <div className="subcategories-full-page">
@@ -41,4 +41,4 @@ const Food = (props) => {
   );
 };
 
-export default Food;
+export default Car;

@@ -35,17 +35,24 @@ const AccountsItem = (props) => {
                 className="accounts-item-li"
                 style={{ backgroundColor: account.color }}
               >
-                <div className="account-type">{account.accountType}:</div>
-                <div className="account-amount-currency">
-                  {account.amount}
-                  {account.currency}
-                </div>
-                <div className="remove-account">
-                  <img
-                    onClick={() => handleRemoveAccount(account)}
-                    className="account-img"
-                    src="/img/delete-icon.png"
-                  />
+                <div
+                  className="d-flex justify-content-between"
+                  style={{ padding: "5px" }}
+                >
+                  <div>
+                    <div className="account-type">{account.accountType}:</div>
+                    <div className="account-amount-currency">
+                      {account.amount}
+                      {account.currency}
+                    </div>
+                  </div>
+                  <div className="remove-account">
+                    <img
+                      onClick={() => handleRemoveAccount(account)}
+                      className="account-img"
+                      src="/img/delete-icon.png"
+                    />
+                  </div>
                 </div>
               </li>
             );

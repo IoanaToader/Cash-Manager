@@ -1,7 +1,7 @@
 import React from "react";
 import "./Subcategories.css";
 
-const Food = (props) => {
+const HouseHold = (props) => {
   return (
     <>
       <div className="subcategories-full-page">
@@ -10,7 +10,7 @@ const Food = (props) => {
             <a className="subcategories-a" href="/" target="_blank">
               <img
                 src="/img/categories/dailyFood.png"
-                style={{ backgroundColor: "#a444db" }}
+                style={{ backgroundColor: "#eb8f34" }}
               />
               Daily Food
             </a>
@@ -20,7 +20,7 @@ const Food = (props) => {
             <a className="subcategories-a" href="#">
               <img
                 src="/img/categories/coffe.png"
-                style={{ backgroundColor: "#a444db" }}
+                style={{ backgroundColor: "#eb8f34" }}
               />
               Coffe Shop
             </a>
@@ -30,7 +30,7 @@ const Food = (props) => {
             <a className="subcategories-a" href="#">
               <img
                 src="/img/categories/restaurant.png"
-                style={{ backgroundColor: "#a444db" }}
+                style={{ backgroundColor: "#eb8f34" }}
               />
               Restaurant
             </a>
@@ -41,4 +41,4 @@ const Food = (props) => {
   );
 };
 
-export default Food;
+export default HouseHold;
