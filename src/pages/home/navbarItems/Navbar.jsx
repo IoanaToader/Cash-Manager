@@ -22,9 +22,9 @@ const Navbar = (props) => {
       case "/categories":
         setTitle("Categories");
         break;
-      case "/overview":
-        setTitle("Overview");
-        break;
+      // case "/overview":
+      //   setTitle("Overview");
+      //   break;
       case "/add-expense":
         setTitle("Add expense");
         break;
@@ -56,7 +56,9 @@ const Navbar = (props) => {
           {/* ----------------Navigation for mobile--------------------- */}
 
           <div id="add-expense">
-            <img src="/img/phone img/add-expense.png" />
+            <a href="/add-expense">
+              <img src="/img/phone img/add-expense.png" />
+            </a>
           </div>
 
           {/* --------------------------------------------------- */}

@@ -6,9 +6,9 @@ import SignUp from "./pages/signUp/SignUp";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import AccountsItem from "./pages/home/accounts/AccountsItem";
 import CategoriesItem from "./pages/home/categories/CategoriesItem";
-import OverviewItem from "./pages/home/OverviewItem";
-import AddExpenseItem from "./pages/home/AddExpenseItem";
+import AddExpenseItem from "./pages/home/addExpense/AddExpenseItem";
 import Navbar from "./pages/home/navbarItems/Navbar";
+import OverviewItem from "./pages/home/overview/OverviewItem";
 
 const Router = () => {
   return (
