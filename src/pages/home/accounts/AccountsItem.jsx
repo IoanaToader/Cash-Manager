@@ -26,37 +26,40 @@ const AccountsItem = (props) => {
     <>
       <div className="accounts-item-full-page">
         <ul className="accounts-item-ul">
-          {userContext.data.accounts.length === 0 && (
-            <p>No accounts on your list, add some.</p>
-          )}
-          {userContext.data.accounts.map((account) => {
-            return (
-              <li
-                className="accounts-item-li"
-                style={{ backgroundColor: account.color }}
-              >
-                <div
-                  className="d-flex justify-content-between"
-                  style={{ padding: "5px" }}
+          {userContext.data.accounts &&
+            userContext.data.accounts.length === 0 && (
+              <p>No accounts on your list, add some.</p>
+            )}
+
+          {userContext.data.accounts &&
+            userContext.data.accounts.map((account) => {
+              return (
+                <li
+                  className="accounts-item-li"
+                  style={{ backgroundColor: account.color }}
                 >
-                  <div>
-                    <div className="account-type">{account.accountType}:</div>
-                    <div className="account-amount-currency">
-                      {account.amount}
-                      {account.currency}
+                  <div
+                    className="d-flex justify-content-between"
+                    style={{ padding: "5px" }}
+                  >
+                    <div>
+                      <div className="account-type">{account.accountType}:</div>
+                      <div className="account-amount-currency">
+                        {account.amount}
+                        {account.currency}
+                      </div>
+                    </div>
+                    <div className="remove-account">
+                      <img
+                        onClick={() => handleRemoveAccount(account)}
+                        className="account-img"
+                        src="/img/delete-icon.png"
+                      />
                     </div>
                   </div>
-                  <div className="remove-account">
-                    <img
-                      onClick={() => handleRemoveAccount(account)}
-                      className="account-img"
-                      src="/img/delete-icon.png"
-                    />
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+                </li>
+              );
+            })}
           <button
             onClick={toggleAddAccountVisible}
             className="accounts-item-button"

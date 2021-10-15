@@ -12,13 +12,16 @@ const UserContextProvider = (props) => {
     signUpUsernameErrorMessage: "",
     signUpEmailErrorMessage: "",
     accounts: [],
+    expenses: [],
   });
 
   //--------------------------Asa salvam datele cand dam refresh la pagina---------------
   useEffect(() => {
+    console.log("value", value);
     if (
-      Object.keys(value.userDetails).length > 0 ||
-      value.accounts.length > 0
+      value &&
+      (Object.keys(value.userDetails || {}).length > 0 ||
+        (value.accounts && value.accounts.length > 0))
     ) {
       saveData();
     }
@@ -27,7 +30,8 @@ const UserContextProvider = (props) => {
   useEffect(() => {
     let oldData = readData();
     oldData = JSON.parse(oldData);
-    setValue(oldData);
+
+    setValue({ ...value, ...oldData });
     console.log("oldData", oldData);
   }, []);
   //--------------------------------------------pana aici---------------------------------
@@ -100,6 +104,11 @@ const UserContextProvider = (props) => {
     }
   };
 
+  const addExpense = (expense) => {
+    console.log("value", value);
+    setValue({ ...value, expenses: [...value.expenses, expense] });
+  };
+
   //---------------------Aici ne salvam datele-----------------------------
   const saveData = () => {
     localStorage.setItem("contextData", JSON.stringify(value));
@@ -118,6 +127,7 @@ const UserContextProvider = (props) => {
           signUp,
           addAccount,
           removeAccount,
+          addExpense,
         },
       }}
     >

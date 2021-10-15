@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import "./HomePage.css";
 import AccountsItem from "./accounts/AccountsItem";
-import OverviewItem from "./overview/OverviewItem";
+import OverviewItem from "./addExpense/OverviewItem";
 
 const HomePage = () => {
   return (

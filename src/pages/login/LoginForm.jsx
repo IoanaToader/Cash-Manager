@@ -26,7 +26,9 @@ const LoginForm = (props) => {
       <form className="login_form_elements">
         <input
           className={`${
-            userContext.data.loginErrorMessage ? "input-error" : ""
+            userContext.data && userContext.data.loginErrorMessage
+              ? "input-error"
+              : ""
           }`}
           value={email}
           type="email"
@@ -35,7 +37,9 @@ const LoginForm = (props) => {
         ></input>
         <input
           className={`${
-            userContext.data.loginErrorMessage ? "input-error" : ""
+            userContext.data && userContext.data.loginErrorMessage
+              ? "input-error"
+              : ""
           }`}
           value={password}
           type="password"
@@ -51,7 +55,7 @@ const LoginForm = (props) => {
         </button>
       </form>
 
-      {userContext.data.loginErrorMessage !== "" && (
+      {userContext.data && userContext.data.loginErrorMessage !== "" && (
         <div className="error-message">
           {userContext.data.loginErrorMessage}
         </div>
