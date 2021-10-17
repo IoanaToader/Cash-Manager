@@ -13,6 +13,7 @@ const ResponsiveNavbar = (props) => {
             <img
               className="mobile-navbar-logo"
               src="/img/logo/logo_piggy.png"
+              alt="logo"
             />
             <span className="mobile-navbar-user">Ioana</span>
             <div className="mobile-navbar-title-app">My Wallet</div>
@@ -23,7 +24,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/home-icon.png"
+                    src="/img/phone-img/home-icon.png"
+                    alt="home"
                   />
                   Home
                 </a>
@@ -32,7 +34,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/accounts">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/accounts-icon.png"
+                    src="/img/phone-img/accounts-icon.png"
+                    alt="accounts"
                   />
                   Accounts
                 </a>
@@ -41,7 +44,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/categories">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/categories-icon.png"
+                    src="/img/phone-img/categories-icon.png"
+                    alt="categories"
                   />
                   Categories
                 </a>
@@ -50,7 +54,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/overview">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/overview-icon.png"
+                    src="/img/phone-img/overview-icon.png"
+                    alt="overview"
                   />
                   Overview
                 </a>
@@ -59,7 +64,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/overview">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/liability-icon.png"
+                    src="/img/phone-img/liability-icon.png"
+                    alt="liability"
                   />
                   Liability
                 </a>
@@ -68,7 +74,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/overview">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/exchange-icon.png"
+                    src="/img/phone-img/exchange-icon.png"
+                    alt="convertor"
                   />
                   Currency Convertor
                 </a>
@@ -77,7 +84,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/overview">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/follow-icon.png"
+                    src="/img/phone-img/follow-icon.png"
+                    alt="follow"
                   />
                   Follow us!
                 </a>
@@ -86,7 +94,8 @@ const ResponsiveNavbar = (props) => {
                 <a className="mobile-link" href="/login">
                   <img
                     className="mobile-img"
-                    src="/img/phone img/logout-icon.png"
+                    src="/img/phone-img/logout-icon.png"
+                    alt="log out"
                   />
                   Log Out
                 </a>
