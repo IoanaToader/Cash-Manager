@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import "./AddAccount.css";
 
@@ -48,14 +48,20 @@ const AddAccount = (props) => {
         <nav className="add-account-nav">
           <ul className="add-account-nav-ul">
             <li className="add-account-nav-li">
-              <img onClick={handleExitAddAcount} src="/img/x-icon.png" />
+              <img
+                onClick={handleExitAddAcount}
+                src="/img/x-icon.png"
+                alt="exit"
+              />
             </li>
 
             <li className="add-account-nav-li">Title</li>
             <li className="add-account-nav-li">
-              <a>
-                <img onClick={submitHandler} src="/img/check-icon.png" />
-              </a>
+              <img
+                onClick={submitHandler}
+                src="/img/check-icon.png"
+                alt="check"
+              />
             </li>
           </ul>
         </nav>

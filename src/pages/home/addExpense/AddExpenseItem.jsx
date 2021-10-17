@@ -4,51 +4,127 @@ import { UserContext } from "../../../contexts/UserContext";
 import "./AddExpenseItem.css";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import VisibleExpense from "./VisibleExpense";
+import Select from "react-select";
 
 const AddExpenseItem = (props) => {
   const userContext = useContext(UserContext);
-  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredCategory, setEnteredCategory] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [enteredSubcategory, setEnteredSubcategory] = useState("");
 
-  const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
+  const subcategoryOptions = [
+    {
+      categoryName: "foodAndDrinks",
+      subcategories: [
+        { value: "dailyFood", label: "Daily Food" },
+        { value: "coffeShop", label: "Coffe Shoop" },
+        { value: "restaurant", label: "Restaurant" },
+      ],
+    },
+    {
+      categoryName: "shopping",
+      subcategories: [
+        { value: "petShop", label: "Pet Shop" },
+        { value: "gifts", label: "Gifts" },
+        { value: "jewelry", label: "Jewelry" },
+        { value: "healthAndBeauty", label: "Health and Beauty" },
+      ],
+    },
+    {
+      categoryName: "household",
+      subcategories: [
+        { value: "rent", label: "Rent" },
+        { value: "mortgage", label: "Mortgage" },
+      ],
+    },
+  ];
+
+  let timer = null;
+  console.log(props);
+
+  useEffect(() => {
+    if (show) {
+      setTimer();
+    }
+  }, [show]);
+
+  const setTimer = () => {
+    if (timer != null) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      setShow(!show);
+      timer = null;
+    }, 3000);
+  };
+
+  const categoryChangeHandler = (option) => {
+    setEnteredCategory(option);
   };
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
   };
   const dateChangeHandler = (date) => {
-    setEnteredDate(date);
-    console.log(date);
+    setEnteredDate(date.value);
+  };
+  const subcategoryChangeHandler = (option) => {
+    setEnteredSubcategory(option);
   };
 
   const submitExpenseHandler = (event) => {
     event.preventDefault();
 
     const expense = {
-      expenseTitle: enteredTitle,
+      expenseCategory: enteredCategory.value,
+
       amount: enteredAmount,
       account: "",
       date: new Date(enteredDate),
     };
+    console.log(typeof enteredCategory);
     userContext.methods.addExpense(expense);
     setShow(!show);
-    setEnteredTitle("");
+    setEnteredCategory("");
     setEnteredAmount("");
     setEnteredDate("");
   };
+  const categoryOptions = [
+    { value: "foodAndDrinks", label: "Food and Drinks" },
+    { value: "shopping", label: "Shopping" },
+    { value: "household", label: "Household" },
+    { value: "transportation", label: "Transportation" },
+    { value: "car", label: "Car" },
+    { value: "lifeAndEntertainment", label: "Life and Entertainment" },
+    { value: "hardwarePC", label: "Hardware, PC" },
+    { value: "due", label: "Due" },
+    { value: "investment", label: "Investment" },
+    { value: "income", label: "Income" },
+  ];
 
   return (
     <div style={{ width: "100%", height: "100%", backgroundColor: "#f2f7f5" }}>
       <form className="add-expense" onSubmit={submitExpenseHandler}>
         <div className="add-expense-value">
           <div className="add-expense-value">
-            <label>Title:</label>
-            <input
-              type="text"
-              value={enteredTitle}
-              onChange={titleChangeHandler}
+            <label>Expense name:</label>
+
+            <Select
+              value={enteredCategory}
+              onChange={categoryChangeHandler}
+              options={categoryOptions}
+            />
+
+            <Select
+              value={enteredSubcategory}
+              onChange={subcategoryChangeHandler}
+              options={
+                subcategoryOptions?.find(
+                  (value) => value.categoryName === enteredCategory.value
+                )?.subcategories ?? []
+              }
             />
           </div>
           <div className="add-expense-value">
@@ -70,7 +146,7 @@ const AddExpenseItem = (props) => {
 
           <div className="add-expense-value">
             <label>Date:</label>
-            <div>
+            <div className="add-expense-date">
               <DatePickerComponent
                 value={enteredDate}
                 dateFormat="dd-MMM-yy"
@@ -88,28 +164,7 @@ const AddExpenseItem = (props) => {
         </div>
       </form>
 
-      {show && (
-        <VisibleExpense
-          delay={2}
-          show={show}
-          children={
-            userContext.data &&
-            userContext.data.expenses &&
-            userContext.data.expenses.map((expense) => {
-              return (
-                <li className="overviewItem-li">
-                  <div date={expense.date}></div>
-
-                  <div>
-                    <h2>{expense.expenseTitle}</h2>
-                    <div>${expense.amount}</div>
-                  </div>
-                </li>
-              );
-            })
-          }
-        />
-      )}
+      {show && <VisibleExpense show={show} />}
     </div>
   );
 };

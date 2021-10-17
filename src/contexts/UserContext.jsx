@@ -17,7 +17,6 @@ const UserContextProvider = (props) => {
 
   //--------------------------Asa salvam datele cand dam refresh la pagina---------------
   useEffect(() => {
-    console.log("value", value);
     if (
       value &&
       (Object.keys(value.userDetails || {}).length > 0 ||
@@ -32,7 +31,6 @@ const UserContextProvider = (props) => {
     oldData = JSON.parse(oldData);
 
     setValue({ ...value, ...oldData });
-    console.log("oldData", oldData);
   }, []);
   //--------------------------------------------pana aici---------------------------------
 
@@ -105,8 +103,17 @@ const UserContextProvider = (props) => {
   };
 
   const addExpense = (expense) => {
-    console.log("value", value);
     setValue({ ...value, expenses: [...value.expenses, expense] });
+  };
+
+  const removeExpense = (expense) => {
+    const newExpenses = value.expenses;
+    const indexOfExpense = newExpenses.indexOf(expense);
+
+    if (indexOfExpense > -1) {
+      newExpenses.splice(indexOfExpense, 1);
+      setValue({ ...value, expenses: newExpenses });
+    }
   };
 
   //---------------------Aici ne salvam datele-----------------------------
@@ -128,6 +135,7 @@ const UserContextProvider = (props) => {
           addAccount,
           removeAccount,
           addExpense,
+          removeExpense,
         },
       }}
     >

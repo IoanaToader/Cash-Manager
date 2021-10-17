@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { UserContext } from "../../../contexts/UserContext";
 
@@ -54,6 +54,7 @@ const AccountsItem = (props) => {
                         onClick={() => handleRemoveAccount(account)}
                         className="account-img"
                         src="/img/delete-icon.png"
+                        alt="Delete Icon"
                       />
                     </div>
                   </div>

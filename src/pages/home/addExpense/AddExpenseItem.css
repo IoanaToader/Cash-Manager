@@ -12,7 +12,8 @@
   max-width: 95%;
   font-family: "Karma", serif;
 }
-
+.add-expense-date {
+}
 .add-expense-buttons button {
   padding: 6px;
   border-radius: 5px;

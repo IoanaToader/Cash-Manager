@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { withRouter } from "react-router";
 import { UserContext } from "../../../contexts/UserContext";
 import "./OverviewItem.css";
+// import DoughnutChart from "./DoughnutChart";
 
 const OverviewItem = (props) => {
   const userContext = useContext(UserContext);
@@ -14,16 +15,17 @@ const OverviewItem = (props) => {
           userContext.data.expenses.map((expense) => {
             return (
               <li className="overviewItem-li">
-                <div date={expense.date}></div>
+                <div>{expense.date}</div>
 
                 <div>
-                  <h2>{expense.expenseTitle}</h2>
+                  <h2>{expense.expenseCategory}</h2>
                   <div>${expense.amount}</div>
                 </div>
               </li>
             );
           })}
       </div>
+      {/* <DoughnutChart /> */}
     </div>
   );
 };

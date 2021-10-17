@@ -1,35 +1,147 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 import "./CategoriesItem.css";
-import Food from "./Food";
-import Shopping from "./Shopping";
+import Category from "./Category";
+import Subcategory from "./Subcategory";
 
 const CategoriesItem = (props) => {
-  const [isFoodPageVisible, setFoodPageVisible] = useState(false);
-  const [isShoppingPageVisible, setShoppingPageVisible] = useState(false);
+  const [isSubcategoryVisible, setSubcategoryVisible] = useState(false);
+  const [subcategories, setSubcategories] = useState([]);
 
-  const toggleFoodDrinksPage = () => {
-    setFoodPageVisible(!isFoodPageVisible);
+  const toggleSubcategoryVisible = () => {
+    setSubcategoryVisible(!isSubcategoryVisible);
   };
-  const toggleShoppingPage = () => {
-    setShoppingPageVisible(!isShoppingPageVisible);
+
+  const handleCategorySelect = (subcategories) => {
+    toggleSubcategoryVisible();
+    setSubcategories(subcategories);
   };
+
+  const categories = [
+    {
+      id: "1",
+      name: "Food and Drinks",
+      image: "/img/categories/food-icon.png",
+      backgroundColor: "#eb4034",
+      subcategories: [
+        {
+          id: "1",
+          name: "Daily Food",
+          image: "/img/categories/dailyFood.png",
+          backgroundColor: "#eb4034",
+        },
+        {
+          id: "2",
+          name: "Coffe Shop",
+          image: "/img/categories/coffe.png",
+          backgroundColor: "#eb4034",
+        },
+        {
+          id: "3",
+          name: "Restaurant",
+          image: "/img/categories/restaurant.png",
+          backgroundColor: "#eb4034",
+        },
+      ],
+    },
+    {
+      id: "2",
+      name: "Shopping",
+      image: "/img/categories/shopping-icon.png",
+      backgroundColor: "#349feb",
+      subcategories: [
+        {
+          id: "1",
+          name: "Pet Shop",
+          image: "/img/categories/shopping-icon.png",
+          backgroundColor: "#349feb",
+        },
+        {
+          id: "2",
+          name: "Gifts",
+          image: "/img/categories/shopping-icon.png",
+          backgroundColor: "#349feb",
+        },
+        {
+          id: "3",
+          name: "Jewelry",
+          image: "/img/categories/shopping-icon.png",
+          backgroundColor: "#349feb",
+        },
+        {
+          id: "4",
+          name: "Health and Beauty",
+          image: "/img/categories/shopping-icon.png",
+          backgroundColor: "#349feb",
+        },
+      ],
+    },
+    {
+      id: "3",
+      name: "Household",
+      image: "/img/categories/home-icon.png",
+      backgroundColor: "#eb8f34",
+    },
+    {
+      id: "4",
+      name: "Transportation",
+      image: "/img/categories/transportation-icon.png",
+      backgroundColor: "#eb4034",
+    },
+    {
+      id: "5",
+      name: "Car",
+      image: "/img/categories/car-icon.png",
+      backgroundColor: "#a444db",
+    },
+    {
+      id: "6",
+      name: "Life and Entertainment",
+      image: "/img/categories/food-icon.png",
+      backgroundColor: "#64c920",
+    },
+    {
+      id: "7",
+      name: "Hardware, PC",
+      image: "/img/categories/pc-icon.png",
+      backgroundColor: "#2f72ba",
+    },
+    {
+      id: "8",
+      name: "Due",
+      image: "/img/categories/due-icon.png",
+      backgroundColor: "#2aad7b",
+    },
+    {
+      id: "9",
+      name: "Investment",
+      image: "/img/categories/investment-icon.png",
+      backgroundColor: "#f562ae",
+    },
+    {
+      id: "10",
+      name: "Income",
+      image: "/img/categories/income-icon.png",
+      backgroundColor: "#fcb04c",
+    },
+  ];
 
   return (
     <>
-      {isFoodPageVisible && (
+      {isSubcategoryVisible && subcategories && (
         <div
-          onClick={toggleFoodDrinksPage}
+          onClick={toggleSubcategoryVisible}
           id="overlay"
           style={{ width: "100%" }}
-        ></div>
-      )}
-      {isShoppingPageVisible && (
-        <div
-          onClick={toggleShoppingPage}
-          id="overlay"
-          style={{ width: "100%" }}
-        ></div>
+        >
+          <div className="subcategories-full-page">
+            <ul className="subcategories-ul">
+              {subcategories.map((subcategory) => (
+                <Subcategory subcategory={subcategory} />
+              ))}
+            </ul>
+          </div>
+        </div>
       )}
 
       <div className="categories-item-full-page">
@@ -38,86 +150,14 @@ const CategoriesItem = (props) => {
         </div>
 
         <ul className="categories-item-ul">
-          <li onClick={toggleFoodDrinksPage} className="categories-item-li">
-            <img
-              src="/img/categories/food-icon.png"
-              style={{ backgroundColor: "#eb4034" }}
-            />
-            Food and Drinks
-            {isFoodPageVisible && <Food />}
-          </li>
-
-          <li onClick={toggleShoppingPage} className="categories-item-li">
-            <img
-              src="/img/categories/shopping-icon.png"
-              style={{ backgroundColor: "#349feb" }}
-            />
-            Shopping
-            {isShoppingPageVisible && <Shopping />}
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/home-icon.png"
-              style={{ backgroundColor: "#eb8f34" }}
-            />
-            Household
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/transportation-icon.png"
-              style={{ backgroundColor: "#8c8c8b" }}
-            />
-            Transportation
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/car-icon.png"
-              style={{ backgroundColor: "#a444db" }}
-            />
-            Car
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/life-icon.png"
-              style={{ backgroundColor: "#64c920" }}
-            />
-            Life and Entertainment
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/pc-icon.png"
-              style={{ backgroundColor: "#2f72ba" }}
-            />
-            Hardware, PC
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/due-icon.png"
-              style={{ backgroundColor: "#2aad7b" }}
-            />
-            Due
-          </li>
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/investment-icon.png"
-              style={{ backgroundColor: "#f562ae" }}
-            />
-            Investment
-          </li>
-
-          <li className="categories-item-li">
-            <img
-              src="/img/categories/income-icon.png"
-              style={{ backgroundColor: "#fcb04c" }}
-            />
-            Income
-          </li>
+          {categories.map((category) => {
+            return (
+              <Category
+                category={category}
+                handleCategorySelect={handleCategorySelect}
+              />
+            );
+          })}
         </ul>
       </div>
     </>

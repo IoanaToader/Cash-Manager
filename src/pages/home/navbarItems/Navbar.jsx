@@ -1,55 +1,52 @@
 import React, { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
 import { UserContext } from "../../../contexts/UserContext";
 import "./Navbar.css";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const userContext = useContext(UserContext);
   const [mobileClick, setMobileClick] = useState(false);
-  const [title, setTitle] = useState("");
   const location = useLocation();
+  let title = "";
 
-  useEffect(() => {
-    switch (location.pathname) {
-      case "/":
-        setTitle(`Hello, ${userContext.data?.userDetails?.username ?? ""}`);
-        break;
-      case "/accounts":
-        setTitle("Accounts");
-        break;
-      case "/categories":
-        setTitle("Categories");
-        break;
-      // case "/overview":
-      //   setTitle("Overview");
-      //   break;
-      case "/add-expense":
-        setTitle("Add expense");
-        break;
-      default:
-        break;
-    }
-  }, [location, userContext.data.userDetails.username]);
+  switch (location.pathname) {
+    case "/":
+      title = `Hello, ${userContext.data?.userDetails?.username ?? ""}`;
+      break;
+    case "/accounts":
+      title = "Accounts";
+      break;
+    case "/categories":
+      title = "Categories";
+      break;
+    case "/overview":
+      title = "Overview";
+      break;
+    case "/add-expense":
+      title = "Add expense";
+      break;
+    default:
+      break;
+  }
 
   const showMobileNavbar = () => {
     setMobileClick(!mobileClick);
   };
 
   return (
-    <>
+    <div>
       <nav className=" navbar navbar-expand-lg" id="home-navbar">
         <div className="container-fluid">
           {/* ----------------Navigation for mobile--------------------- */}
           <div onClick={showMobileNavbar} id="hamburger-meniu-icon">
-            <img src="/img/phone img/hamburger-meniu.png" />
+            <img src="/img/phone-img/hamburger-meniu.png" alt="meniu" />
           </div>
 
           {/* --------------------------------------------------- */}
 
           <a className="navbar-brand" href="/">
-            <img id="navbar-logo" src="/img/logo/logo_piggy.png" />{" "}
+            <img id="navbar-logo" src="/img/logo/logo_piggy.png" alt="logo" />{" "}
           </a>
           <span id="navbar-title">{title}</span>
 
@@ -57,7 +54,7 @@ const Navbar = (props) => {
 
           <div id="add-expense">
             <a href="/add-expense">
-              <img src="/img/phone img/add-expense.png" />
+              <img src="/img/phone-img/add-expense.png" alt="add" />
             </a>
           </div>
 
@@ -113,7 +110,7 @@ const Navbar = (props) => {
       </nav>
 
       {mobileClick && <ResponsiveNavbar onHandleNavbar={showMobileNavbar} />}
-    </>
+    </div>
   );
 };
 
