@@ -1,156 +1,266 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import Select from "react-select";
+import { UserContext } from "../../../contexts/UserContext";
 
 import "./AddAccount.css";
 
 const AddAccount = (props) => {
-  const [accountType, setAccountType] = useState("");
+  const userContext = useContext(UserContext);
+  const [selectedAccountType, setSelectedAccountType] = useState({});
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [selectedCurrency, setSelectedCurrency] = useState({});
   const [color, setColor] = useState("");
 
-  const accountTypeChangeHandler = (event) => {
-    setAccountType(event.target.value);
-  };
-  const enteredAmountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
-  };
-  const currencyChangeHandler = (event) => {
-    setCurrency(event.target.value);
+  const [accountTypes, setAccountTypes] = useState(
+    Object.keys(userContext?.data?.accountTypes).map((accountValue) => {
+      return {
+        value: accountValue,
+        label: userContext?.data?.accountTypes[accountValue],
+      };
+    })
+  );
+  const [accountCurrency, setAccountCurrency] = useState(
+    Object.keys(userContext?.data?.accountCurrency).map((accountCurrency) => {
+      return {
+        value: accountCurrency,
+        label: userContext?.data?.accountCurrency[accountCurrency],
+      };
+    })
+  );
+  const [accountBackgroundColors, setAccountBackgroundColors] = useState(
+    userContext?.data?.accountBackgroundColors.map((accountBackgroundColor) => {
+      return {
+        value: accountBackgroundColor,
+        label: "",
+      };
+    })
+  );
+
+  const [errors, setErrors] = useState({
+    accountError: true,
+    amountError: true,
+    currencyError: true,
+    colorError: true,
+  });
+
+  const selectColourStyles = {
+    control: (base) => {
+      return {
+        ...base,
+        border: "1px solid #ccc",
+        boxShadow: "none",
+        "&:hover": {
+          borderColor: "#86b899",
+        },
+      };
+    },
+    option: (styles, { isSelected, isFocused }) => {
+      return {
+        ...styles,
+        color: isSelected ? "#1d3924" : "",
+        backgroundColor: isFocused ? "#d7f7e8" : "",
+      };
+    },
   };
 
-  const colorChangeHandler = (event) => {
-    setColor(event.target.value);
+  const colourStyles = {
+    control: (base) => {
+      return {
+        ...base,
+        border: "1px solid #ccc",
+        "&:hover": {
+          borderColor: "#86b899",
+        },
+        boxShadow: "none",
+        backgroundColor: color,
+      };
+    },
+    option: (styles, { data }) => {
+      return {
+        ...styles,
+        backgroundColor: data.value,
+        height: 30,
+      };
+    },
+  };
+
+  const accountTypeChangeHandler = (option) => {
+    setSelectedAccountType(option);
+
+    if (option.value) {
+      setErrors({
+        ...errors,
+        accountError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        accountError: true,
+      });
+    }
+  };
+
+  const enteredAmountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+    if (event.target.value) {
+      setErrors({
+        ...errors,
+        amountError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        amountError: true,
+      });
+    }
+  };
+  const currencyChangeHandler = (option) => {
+    setSelectedCurrency(option);
+
+    if (option.value) {
+      setErrors({ ...errors, currencyError: false });
+    } else {
+      setErrors({ ...errors, currencyError: true });
+    }
+  };
+
+  const colorChangeHandler = (option) => {
+    setColor(option.value);
+    if (option.value) {
+      setErrors({ ...errors, colorError: false });
+    } else {
+      setErrors({ ...errors, colorError: true });
+    }
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     const addAccountData = {
-      accountType: accountType,
+      id:
+        userContext?.data?.accounts[userContext.data.accounts.length - 1]?.id +
+          1 || 1,
+      accountType: selectedAccountType,
       amount: enteredAmount,
-      currency: currency,
+      currency: selectedCurrency.value,
       color: color,
     };
+
+    userContext.data.accountsBalance[addAccountData.id] = enteredAmount;
     props.onAddAccount(addAccountData);
 
-    setAccountType("");
+    setSelectedAccountType("");
     setEnteredAmount("");
-    setCurrency("");
+    setSelectedCurrency("");
     setColor("");
   };
+
   const handleExitAddAcount = () => {
-    props.onExit();
+    props.toggleAddAccountVisible();
   };
 
   return (
     <div className="add-account-full-page">
       <div className="add-account">
-        <nav className="add-account-nav">
-          <ul className="add-account-nav-ul">
-            <li className="add-account-nav-li">
-              <img
-                onClick={handleExitAddAcount}
-                src="/img/x-icon.png"
-                alt="exit"
-              />
-            </li>
-
-            <li className="add-account-nav-li">Title</li>
-            <li className="add-account-nav-li">
-              <img
-                onClick={submitHandler}
-                src="/img/check-icon.png"
-                alt="check"
-              />
-            </li>
-          </ul>
-        </nav>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} style={{ padding: "1rem" }}>
           <div className="add-account-form form-group">
-            <label>Account type: *</label>
-            <div className="add-account-form form-group">
-              <select
-                value={accountType}
+            <label className="add-account-label">
+              Account type:<span style={{ color: "red" }}> *</span>
+            </label>
+            <div className="form-group">
+              <Select
+                value={selectedAccountType}
+                options={accountTypes}
+                styles={selectColourStyles}
                 onChange={accountTypeChangeHandler}
                 className="custom-select mr-sm-2"
                 id="inlineFormCustomSelect"
-              >
-                <option selected>Choose...</option>
-                <option value="Cash">Cash</option>
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">MasterCard</option>
-                <option value="Credit Card">Credit Card</option>
-              </select>
+                placeholder="Cash"
+              ></Select>
             </div>
           </div>
           <div className="add-account-form form-group">
-            <label>Enter the amount: *</label>
-            <input
-              value={enteredAmount}
-              onChange={enteredAmountChangeHandler}
-              type="number"
-              className="form-control"
-            />
+            <label className="add-account-label">
+              Enter the amount:
+              <span style={{ color: "red" }}> *</span>
+            </label>
+            <div>
+              <input
+                value={enteredAmount}
+                onChange={enteredAmountChangeHandler}
+                type="number"
+                step="0.1"
+                min="0"
+                max="10000000"
+                className="form-control"
+                placeholder="1.00"
+                style={{ boxShadow: "none", border: "1px solid #ccc" }}
+              />
+            </div>
           </div>
           <div className="add-account-form form-group">
-            <label>Currency: *</label>
-            <div className="add-account-form form-group">
-              <select
-                value={currency}
+            <label className="add-account-label">
+              Currency:
+              <span style={{ color: "red" }}> *</span>
+            </label>
+            <div className=" form-group">
+              <Select
+                value={selectedCurrency}
+                options={accountCurrency}
+                styles={selectColourStyles}
                 onChange={currencyChangeHandler}
-                class="custom-select mr-sm-2"
+                className="custom-select mr-sm-2"
                 id="inlineFormCustomSelect"
-              >
-                <option selected>Choose...</option>
-                <option value="RON">RON</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="USD">USD</option>
-                <option value="HUF">HUF</option>
-              </select>
+                placeholder="RON"
+              ></Select>
             </div>
           </div>
           <div className="add-account-form form-group">
-            <label>Color: *</label>
-            <div className="add-account-form form-group">
-              <select
+            <label className="add-account-label">
+              Color:
+              <span style={{ color: "red" }}> *</span>
+            </label>
+            <div className="form-group">
+              <Select
                 value={color}
-                style={{ backgroundColor: color }}
+                options={accountBackgroundColors}
+                styles={colourStyles}
                 onChange={colorChangeHandler}
-                class="custom-select mr-sm-2"
+                className="custom-select mr-sm-2"
                 id="inlineFormCustomSelect"
-              >
-                <option
-                  value="#86db94"
-                  style={{ backgroundColor: "#86db94" }}
-                ></option>
-
-                <option
-                  value="#f5c542"
-                  style={{ backgroundColor: "#f5c542" }}
-                ></option>
-                <option
-                  value="#f58b3b"
-                  style={{ backgroundColor: "#f58b3b" }}
-                ></option>
-                <option
-                  value="#098227"
-                  style={{ backgroundColor: "#098227" }}
-                ></option>
-                <option
-                  value="#618bed"
-                  style={{ backgroundColor: "#618bed" }}
-                ></option>
-                <option
-                  value="#b767f0"
-                  style={{ backgroundColor: "#b767f0" }}
-                ></option>
-                <option
-                  value="#f26b5a"
-                  style={{ backgroundColor: "#f26b5a" }}
-                ></option>
-              </select>
+                placeholder=""
+              ></Select>
             </div>
+          </div>
+
+          {Object.keys(errors).find((errorKey) => errors[errorKey]) && (
+            <div className="add-account-error-message">
+              Please fill in all the required fields !
+            </div>
+          )}
+
+          <div style={{ textAlign: "center", paddingTop: "1rem" }}>
+            <button
+              className={`${
+                Object.keys(errors).find((errorKey) => errors[errorKey])
+                  ? "add-account-disabled-button"
+                  : "account-handle-button"
+              }`}
+              onClick={submitHandler}
+              style={{ marginRight: "1rem" }}
+              disabled={Object.keys(errors).find(
+                (errorKey) => errors[errorKey]
+              )}
+            >
+              Add Account
+            </button>
+            <button
+              className="account-handle-button "
+              onClick={handleExitAddAcount}
+              style={{ marginLeft: "1rem" }}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>

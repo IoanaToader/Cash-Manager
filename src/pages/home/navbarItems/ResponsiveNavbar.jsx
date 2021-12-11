@@ -9,7 +9,7 @@ const ResponsiveNavbar = (props) => {
     <>
       <div className="mobile-navbar-full-page">
         <div className="mobile-elements">
-          <div class="mobile-navbar">
+          <div className="mobile-navbar">
             <img
               className="mobile-navbar-logo"
               src="/img/logo/logo_piggy.png"
@@ -28,6 +28,16 @@ const ResponsiveNavbar = (props) => {
                     alt="home"
                   />
                   Home
+                </a>
+              </li>
+              <li className="mobile-item">
+                <a className="mobile-link" href="/add-expense">
+                  <img
+                    className="mobile-img"
+                    src="/img/phone-img/expense-icon.png"
+                    alt="accounts"
+                  />
+                  Add expense
                 </a>
               </li>
               <li className="mobile-item">
@@ -60,16 +70,7 @@ const ResponsiveNavbar = (props) => {
                   Overview
                 </a>
               </li>
-              <li className="mobile-item">
-                <a className="mobile-link" href="/overview">
-                  <img
-                    className="mobile-img"
-                    src="/img/phone-img/liability-icon.png"
-                    alt="liability"
-                  />
-                  Liability
-                </a>
-              </li>
+
               <li className="mobile-item">
                 <a className="mobile-link" href="/overview">
                   <img
@@ -80,16 +81,7 @@ const ResponsiveNavbar = (props) => {
                   Currency Convertor
                 </a>
               </li>
-              <li className="mobile-item">
-                <a className="mobile-link" href="/overview">
-                  <img
-                    className="mobile-img"
-                    src="/img/phone-img/follow-icon.png"
-                    alt="follow"
-                  />
-                  Follow us!
-                </a>
-              </li>
+
               <li className="mobile-item">
                 <a className="mobile-link" href="/login">
                   <img

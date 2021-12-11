@@ -5,19 +5,17 @@
 }
 
 .accounts-item-ul {
-  margin-right: 2rem;
-  display: grid;
+  padding: 1rem;
 }
 .accounts-item-li {
   color: white;
   list-style-type: none;
   border-radius: 5px;
-  padding: 6px;
+  padding: 5px;
   margin-bottom: 1rem;
   box-shadow: 0px 2px 4px 1px rgb(186 186 186 / 29%);
   margin: auto;
   margin-top: 1rem;
-  width: 70%;
   font-family: "Karma", serif;
 }
 
@@ -35,9 +33,37 @@
 }
 
 .account-type {
-  font-size: 23px;
+  font-size: 17px;
 }
 
-.remove-account img {
-  margin-top: 0.8rem;
+.accounts-item-addAccountMessage {
+  font-size: 17px;
+  color: #1d3924;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgb(106 116 110 / 25%);
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: "Karma", serif;
+  width: max-content;
+}
+
+@media (max-width: 360px) and (min-width: 50px) {
+  .accounts-item-addAccountMessage {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 990px) {
+  .accounts-item-mobile {
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .accounts-item-mobile {
+    width: fit-content;
+    margin: auto;
+  }
 }

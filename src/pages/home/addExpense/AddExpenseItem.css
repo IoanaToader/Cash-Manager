@@ -2,29 +2,24 @@
 
 .add-expense {
   background-color: white;
-  padding-left: 2rem;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding: 1rem 2rem;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgb(106 116 110 / 25%);
   border-radius: 5px;
-  width: 50rem;
-  max-width: 95%;
+  max-width: 75%;
+  margin: auto;
   font-family: "Karma", serif;
 }
-.add-expense-date {
-}
-.add-expense-buttons button {
-  padding: 6px;
-  border-radius: 5px;
-  border-color: #a5bcac66;
-  background-color: #1a9a3b;
-  color: white;
-  cursor: pointer;
-}
+
 .add-expense-value {
   margin-bottom: 1rem;
   color: #1d3924;
+}
+.add-expense-currency {
+  margin-left: 0rem;
+  margin-top: 3rem;
+  margin-bottom: 0rem;
+  font-weight: bolder;
 }
 
 .add-expense-value label {
@@ -39,7 +34,92 @@
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+.add-expense-amount-input {
+  width: 90%;
+  height: 50%;
+}
 
 .add-expense-buttons {
   text-align: center;
+  justify-content: space-between;
+}
+
+.add-expense-disabled-button {
+  background-color: #d7d3d3 !important;
+  border-color: #d7d3d3;
+  padding: 6px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.add-expense-handle-button {
+  border-color: #a5bcac66;
+  background-color: #1a9a3b;
+  padding: 6px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.addExpense {
+  padding-top: 2rem;
+}
+
+@media only screen and (min-width: 990px) {
+  .add-expense {
+    width: 60%;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .add-expense {
+    width: fit-content;
+  }
+}
+
+/* To remove the line in the input */
+.e-calendar-green.e-input-group.e-control-wrapper.e-date-wrapper.e-input-focus::before,
+.e-calendar-green.e-input-group.e-control-wrapper.e-date-wrapper.e-input-focus::after,
+.e-calendar-green.e-input-group.e-control-wrapper.e-date-wrapper::before,
+.e-calendar-green.e-input-group.e-control-wrapper.e-date-wrapper::after,
+.e-calendar-green.e-input-group:not(.e-float-icon-left):not(.e-success):not(.e-warning):not(.e-error),
+.e-calendar-green.e-input-group.e-control-wrapper.e-input-focus:not(.e-float-icon-left):not(.e-success):not(.e-warning):not(.e-error),
+.e-calendar-green.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before,
+.e-calendar-green.e-input-group:not(.e-float-icon-left):not(.e-float-input)::after {
+  background: none;
+}
+
+/* To change the selected day's and today's color*/
+
+.e-calendar-green .e-calendar .e-content td.e-selected span.e-day,
+.e-calendar-green .e-calendar .e-content td.e-today.e-selected span.e-day {
+  background-color: #1a9a3b;
+  color: white;
+}
+.e-calendar-green .e-calendar .e-content td.e-today span.e-day {
+  color: #1d3924;
+  border: none;
+  box-shadow: none;
+}
+/* To change the Today button and date icon color*/
+
+.e-calendar-green.e-date-wrapper
+  span.e-input-group-icon.e-date-icon.e-icons.e-active,
+.e-calendar-green .e-btn.e-flat.e-primary,
+.e-calendar-green .e-css.e-btn.e-flat.e-primary {
+  color: green;
+}
+.e-calendar-green .e-btn.e-flat.e-primary:hover {
+  background: rgb(19 112 219 / 17%);
+  color: green;
+}
+
+.e-datepicker .e-model-header {
+  background: rgb(94, 240, 160);
+  background: linear-gradient(
+    0deg,
+    rgba(94, 240, 160, 1) 0%,
+    rgba(17, 149, 39, 1) 85%
+  );
+  font-family: "Karma", serif;
 }

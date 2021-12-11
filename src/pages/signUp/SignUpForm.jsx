@@ -89,6 +89,9 @@ const SignUpForm = (props) => {
     ) {
       userContext.methods.signUp(username, password, confirmPassword, email);
       setUsername("");
+      setPassword("");
+      setConfirmPassword("");
+      setEmail("");
     } else {
       let newErrors = {
         ...errors,
@@ -110,13 +113,13 @@ const SignUpForm = (props) => {
         setErrors(newErrors);
       }
     }
+    setErrors("");
   };
 
   return (
     <div className="login_form">
       <form className="login_form_elements">
         <input
-          // className={`${ ? "input-error" : ""}`}
           value={username}
           type="text"
           placeholder="Username"
@@ -126,12 +129,12 @@ const SignUpForm = (props) => {
         {errors.usernameError && (
           <div className="error-message">{errors.usernameError}</div>
         )}
+
         {userContext.data.signUpUsernameErrorMessage && (
           <div>{userContext.data.signUpUsernameErrorMessage}</div>
         )}
 
         <input
-          // className={`${password ? "input-error" : ""}`}
           value={password}
           type="password"
           placeholder="Enter a password"
@@ -143,9 +146,6 @@ const SignUpForm = (props) => {
         )}
 
         <input
-          // className={`${
-          //   userContext.data.loginErrorMessage ? "input-error" : ""
-          // }`}
           value={confirmPassword}
           type="password"
           placeholder="Confirm Password"
@@ -157,7 +157,6 @@ const SignUpForm = (props) => {
         )}
 
         <input
-          // className={`${email ? "input-error" : ""}`}
           value={email}
           type="email"
           placeholder="Email"
@@ -177,6 +176,11 @@ const SignUpForm = (props) => {
           onClick={submitHandlerClick}
         >
           SIGN UP
+        </button>
+        <button className="login_button">
+          <a className="login-sign-in" href="login">
+            SIGN IN
+          </a>
         </button>
       </form>
     </div>

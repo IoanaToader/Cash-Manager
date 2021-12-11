@@ -1,0 +1,31 @@
+.overviewChart {
+  width: 100%;
+  display: inline-flex;
+  font-size: 17px;
+  color: #1d3924;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgb(106 116 110 / 25%);
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 990px) {
+  .chart {
+    margin: auto;
+    width: 50%;
+  }
+}
+@media (max-width: 990px) and (min-width: 768px) {
+  .chart {
+    margin: auto;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .chart {
+    margin: auto;
+    width: 100%;
+  }
+}

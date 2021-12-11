@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { withRouter } from "react-router";
+import { useHistory, withRouter } from "react-router";
 import { UserContext } from "../../../contexts/UserContext";
 import "./AddExpenseItem.css";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
@@ -7,48 +7,80 @@ import VisibleExpense from "./VisibleExpense";
 import Select from "react-select";
 
 const AddExpenseItem = (props) => {
+  const history = useHistory();
   const userContext = useContext(UserContext);
-  const [enteredCategory, setEnteredCategory] = useState("");
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    userContext.data?.categories?.find(
+      (category) => category.id === history.location?.state?.category
+    )
+  );
+
+  const [selectedSubcategory, setSelectedSubcategory] = useState(
+    selectedCategory?.subcategories?.find(
+      (subcategory) => subcategory.id === history.location?.state?.subcategory
+    )
+  );
+
+  const [enteredCategory, setEnteredCategory] = useState(
+    selectedCategory?.name
+  );
+  const [accountOptions, setAccountOptions] = useState({});
   const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredAccount, setEnteredAccount] = useState({});
+  const [selectedCurrency, setSelectedCurrency] = useState("");
   const [enteredDate, setEnteredDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const [enteredSubcategory, setEnteredSubcategory] = useState("");
+  const [enteredSubcategory, setEnteredSubcategory] = useState(
+    selectedSubcategory?.name
+  );
+  const [errors, setErrors] = useState({
+    categoryError:
+      selectedCategory && Object.keys(selectedCategory).length > 0
+        ? false
+        : true,
+    subcategoryError:
+      selectedSubcategory && Object.keys(selectedSubcategory).length > 0
+        ? false
+        : true,
+    accountError: true,
+    amountError: true,
+    dateError: false,
+  });
 
-  const subcategoryOptions = [
-    {
-      categoryName: "foodAndDrinks",
-      subcategories: [
-        { value: "dailyFood", label: "Daily Food" },
-        { value: "coffeShop", label: "Coffe Shoop" },
-        { value: "restaurant", label: "Restaurant" },
-      ],
-    },
-    {
-      categoryName: "shopping",
-      subcategories: [
-        { value: "petShop", label: "Pet Shop" },
-        { value: "gifts", label: "Gifts" },
-        { value: "jewelry", label: "Jewelry" },
-        { value: "healthAndBeauty", label: "Health and Beauty" },
-      ],
-    },
-    {
-      categoryName: "household",
-      subcategories: [
-        { value: "rent", label: "Rent" },
-        { value: "mortgage", label: "Mortgage" },
-      ],
-    },
-  ];
+  const categoryOptions = userContext.data.categories.map((category) => {
+    return { value: category.id, label: category.name };
+  });
+
+  let subcategoryOptions =
+    selectedCategory?.subcategories?.map((subcategory) => {
+      return { value: subcategory.id, label: subcategory.name };
+    }) || null;
 
   let timer = null;
-  console.log(props);
 
   useEffect(() => {
     if (show) {
       setTimer();
     }
   }, [show]);
+
+  useEffect(() => {
+    setAccountOptions(
+      userContext.data.accounts.map((account) => {
+        return {
+          value: account.id,
+          label:
+            account.accountType.label +
+            " (" +
+            userContext?.data?.accountsBalance[account.id] +
+            " " +
+            account.currency +
+            ")",
+        };
+      })
+    );
+  }, [userContext]);
 
   const setTimer = () => {
     if (timer != null) {
@@ -61,110 +93,281 @@ const AddExpenseItem = (props) => {
     }, 3000);
   };
 
-  const categoryChangeHandler = (option) => {
-    setEnteredCategory(option);
-  };
-  const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
-  };
-  const dateChangeHandler = (date) => {
-    setEnteredDate(date.value);
-  };
   const subcategoryChangeHandler = (option) => {
     setEnteredSubcategory(option);
+    setSelectedSubcategory(
+      selectedCategory?.subcategories?.find((subcategory) => {
+        return subcategory.id === option?.value;
+      })
+    );
+
+    if (option) {
+      setErrors({
+        ...errors,
+        subcategoryError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        subcategoryError: true,
+      });
+    }
+  };
+
+  const categoryChangeHandler = (option) => {
+    setEnteredCategory(option);
+    setSelectedCategory(
+      userContext.data?.categories?.find(
+        (category) => category.id === option?.value
+      )
+    );
+    subcategoryChangeHandler(null);
+
+    if (option) {
+      setErrors({
+        ...errors,
+        categoryError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        categoryError: true,
+      });
+    }
+  };
+
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+
+    if (event.target.value) {
+      setErrors({
+        ...errors,
+        amountError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        amountError: true,
+      });
+    }
+  };
+
+  const accountChangeHandler = (option) => {
+    setEnteredAccount(option);
+    const selectedAccountDetails = userContext.data.accounts.filter(
+      (account) => account.id === option.value
+    );
+    setSelectedCurrency(selectedAccountDetails[0]?.currency);
+
+    if (option.label) {
+      setErrors({
+        ...errors,
+        accountError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        accountError: true,
+      });
+    }
+  };
+
+  const dateChangeHandler = (date) => {
+    setEnteredDate(date.value);
+
+    if (date.value) {
+      setErrors({
+        ...errors,
+        dateError: false,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        dateError: true,
+      });
+    }
   };
 
   const submitExpenseHandler = (event) => {
     event.preventDefault();
 
+    const formatDate = { year: "numeric", month: "long", day: "numeric" };
     const expense = {
-      expenseCategory: enteredCategory.value,
-
+      expenseCategory: selectedCategory,
+      expenseSubcategory: selectedSubcategory,
       amount: enteredAmount,
-      account: "",
-      date: new Date(enteredDate),
+      curreny: selectedCurrency,
+      account: enteredAccount.label,
+      date: new Date(enteredDate).toLocaleDateString("en-US", formatDate),
     };
-    console.log(typeof enteredCategory);
+
+    userContext.data.accountsBalance[enteredAccount.value] =
+      Number(userContext.data.accountsBalance[enteredAccount.value]) -
+      enteredAmount;
+
     userContext.methods.addExpense(expense);
     setShow(!show);
     setEnteredCategory("");
+    setEnteredSubcategory("");
     setEnteredAmount("");
+    setSelectedCurrency("");
+    setEnteredAccount("");
     setEnteredDate("");
+    setSelectedCategory("");
+    setSelectedSubcategory("");
+    setErrors({
+      categoryError: true,
+      subcategoryError: true,
+      accountError: true,
+      amountError: true,
+      dateError: true,
+    });
   };
-  const categoryOptions = [
-    { value: "foodAndDrinks", label: "Food and Drinks" },
-    { value: "shopping", label: "Shopping" },
-    { value: "household", label: "Household" },
-    { value: "transportation", label: "Transportation" },
-    { value: "car", label: "Car" },
-    { value: "lifeAndEntertainment", label: "Life and Entertainment" },
-    { value: "hardwarePC", label: "Hardware, PC" },
-    { value: "due", label: "Due" },
-    { value: "investment", label: "Investment" },
-    { value: "income", label: "Income" },
-  ];
+
+  const clearInputs = () => {
+    setEnteredCategory("");
+    setEnteredSubcategory("");
+    setEnteredAmount("");
+    setSelectedCurrency("");
+    setEnteredAccount("");
+    setEnteredDate("");
+    setSelectedCategory("");
+    setSelectedSubcategory("");
+  };
+
+  const selectColourStyles = {
+    control: (base) => {
+      return {
+        ...base,
+        border: "1px solid #ccc",
+        boxShadow: "none",
+        "&:hover": {
+          borderColor: "#86b899",
+        },
+      };
+    },
+    option: (styles, { isSelected, isFocused }) => {
+      return {
+        ...styles,
+        color: isSelected ? "#1d3924" : "",
+        backgroundColor: isFocused ? "#d7f7e8" : "",
+      };
+    },
+  };
 
   return (
     <div style={{ width: "100%", height: "100%", backgroundColor: "#f2f7f5" }}>
-      <form className="add-expense" onSubmit={submitExpenseHandler}>
-        <div className="add-expense-value">
+      <div className="addExpense">
+        <form className="add-expense" onSubmit={submitExpenseHandler}>
           <div className="add-expense-value">
-            <label>Expense name:</label>
+            <div className="add-expense-value">
+              <label>
+                Expense name:{" "}
+                <span style={{ color: "red", fontWeight: "lighter" }}>*</span>
+              </label>
+              <div style={{ width: "100%" }}>
+                <Select
+                  value={enteredCategory}
+                  onChange={categoryChangeHandler}
+                  options={categoryOptions}
+                  defaultInputValue={enteredCategory}
+                  styles={selectColourStyles}
+                />
 
-            <Select
-              value={enteredCategory}
-              onChange={categoryChangeHandler}
-              options={categoryOptions}
-            />
+                <Select
+                  value={enteredSubcategory}
+                  onChange={subcategoryChangeHandler}
+                  options={subcategoryOptions}
+                  defaultInputValue={enteredSubcategory}
+                  styles={selectColourStyles}
+                />
+              </div>
+            </div>
+            <div className="add-expense-value">
+              <label>
+                Account:{" "}
+                <span style={{ color: "red", fontWeight: "lighter" }}>*</span>
+              </label>
+              <Select
+                value={enteredAccount}
+                onChange={accountChangeHandler}
+                options={accountOptions}
+                styles={selectColourStyles}
+              />
+            </div>
+            <div className="d-flex">
+              <div className="add-expense-value">
+                <label>
+                  Amount:{" "}
+                  <span style={{ color: "red", fontWeight: "lighter" }}>*</span>
+                </label>
+                <input
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  value={Number(enteredAmount).toString()}
+                  onChange={amountChangeHandler}
+                  style={{ boxShadow: "none", border: "1px solid #ccc" }}
+                />
+              </div>
+              <div className="add-expense-value">
+                <div className="add-expense-currency">{selectedCurrency}</div>
+              </div>
+            </div>
 
-            <Select
-              value={enteredSubcategory}
-              onChange={subcategoryChangeHandler}
-              options={
-                subcategoryOptions?.find(
-                  (value) => value.categoryName === enteredCategory.value
-                )?.subcategories ?? []
-              }
-            />
-          </div>
-          <div className="add-expense-value">
-            <label>Amount:</label>
-            <input
-              type="number"
-              min="0.01"
-              step="0.01"
-              value={enteredAmount}
-              onChange={amountChangeHandler}
-            />
-          </div>
-          <div className="add-expense-value">
-            <label>Account:</label>
-            <select>
-              <option>aici punem contul disponibil</option>
-            </select>
-          </div>
-
-          <div className="add-expense-value">
-            <label>Date:</label>
-            <div className="add-expense-date">
-              <DatePickerComponent
-                value={enteredDate}
-                dateFormat="dd-MMM-yy"
-                placeholder="Select a date"
-                onChange={dateChangeHandler}
-              ></DatePickerComponent>
+            <div className="add-expense-value">
+              <label>
+                Date:{" "}
+                <span style={{ color: "red", fontWeight: "lighter" }}>*</span>
+              </label>
+              <div className="add-expense-date">
+                <DatePickerComponent
+                  cssClass="e-calendar-green"
+                  value={enteredDate}
+                  format="dd-MMM-yy"
+                  placeholder="Select a date"
+                  onChange={dateChangeHandler}
+                ></DatePickerComponent>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="add-expense-buttons">
-          <button onClick={submitExpenseHandler} type="submit">
-            Add Expense
-          </button>
-          <button>Cancel</button>
-        </div>
-      </form>
 
-      {show && <VisibleExpense show={show} />}
+          {Object.keys(errors).find((errorKey) => errors[errorKey]) && (
+            <div className="add-account-error-message">
+              Please fill in all the required fields !
+            </div>
+          )}
+
+          <div className="d-flex add-expense-buttons">
+            <div className="p-2">
+              <button
+                onClick={submitExpenseHandler}
+                type="submit"
+                disabled={Object.keys(errors).find(
+                  (errorKey) => errors[errorKey]
+                )}
+                className={`${
+                  Object.keys(errors).find((errorKey) => errors[errorKey])
+                    ? "add-expense-disabled-button"
+                    : "add-expense-handle-button"
+                }`}
+              >
+                Add Expense
+              </button>
+            </div>
+            <div className="p-2">
+              <button
+                className="add-expense-handle-button"
+                onClick={clearInputs}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+
+        {show && <VisibleExpense show={show} />}
+      </div>
     </div>
   );
 };

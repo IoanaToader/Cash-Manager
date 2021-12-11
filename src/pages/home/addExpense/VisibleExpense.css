@@ -1,0 +1,19 @@
+.visible-expense-item {
+  font-family: "Karma", serif;
+  width: 50%;
+  display: inline-flex;
+  list-style: none;
+  font-size: 19px;
+  color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgb(106 116 110 / 25%);
+  background: rgb(62, 138, 64);
+  background: linear-gradient(
+    0deg,
+    rgba(62, 138, 64, 1) 3%,
+    rgba(118, 205, 146, 1) 100%
+  );
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

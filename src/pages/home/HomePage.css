@@ -1,4 +1,22 @@
 .main-home-page {
-  height: 100%;
   width: 100%;
+}
+
+@media only screen and (min-width: 990px) {
+  .home-displayed-accounts {
+    width: 50%;
+    margin: auto;
+  }
+  .accounts-item-ul {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .home-displayed-accounts {
+    background-color: #f2f7f5;
+    padding-bottom: 1px;
+    width: fit-content;
+    margin: auto;
+  }
 }

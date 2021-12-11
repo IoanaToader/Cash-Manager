@@ -2,18 +2,18 @@ import React from "react";
 import "./Subcategories.css";
 import { useHistory } from "react-router";
 
-const Subcategory = ({ subcategory }) => {
+const Subcategory = ({ category, subcategory }) => {
   const history = useHistory();
 
   const handleNavigation = (subcategory) => {
-    history.push("/add-expense", { subcategory });
+    history.push("/add-expense", { category, subcategory });
   };
 
   return (
     <>
       <li className="subcategories-li">
         <div
-          className="subcategories-a"
+          className="subcategory-name"
           onClick={() => handleNavigation(subcategory.id)}
         >
           <img

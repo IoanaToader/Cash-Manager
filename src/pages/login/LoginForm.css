@@ -5,8 +5,7 @@
 
 .login_form_elements {
   display: inline-grid;
-  width: 90%;
-  margin-right: -30px;
+  width: 81%;
 }
 
 .login_form_elements input {

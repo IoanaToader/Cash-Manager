@@ -76,6 +76,9 @@
     text-decoration-line: none;
     color: #1d3924;
   }
+  .mobile-link:hover {
+    color: green;
+  }
 
   .mobile-img {
     width: 2rem;

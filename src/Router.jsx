@@ -8,7 +8,8 @@ import AccountsItem from "./pages/home/accounts/AccountsItem";
 import CategoriesItem from "./pages/home/categories/CategoriesItem";
 import AddExpenseItem from "./pages/home/addExpense/AddExpenseItem";
 import Navbar from "./pages/home/navbarItems/Navbar";
-import OverviewItem from "./pages/home/addExpense/OverviewItem";
+import OverviewItem from "./pages/home/overview/OverviewItem";
+import AddAccount from "./pages/home/accounts/AddAcount";
 
 const Router = () => {
   return (
@@ -31,6 +32,9 @@ const Router = () => {
           <Switch>
             <Route path="/accounts">
               <AccountsItem />
+            </Route>
+            <Route path="/add-account">
+              <AddAccount />
             </Route>
 
             <Route path="/categories">

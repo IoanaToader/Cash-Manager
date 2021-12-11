@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
+import AddComponent from "./AddComponent";
 import "./Navbar.css";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const userContext = useContext(UserContext);
   const [mobileClick, setMobileClick] = useState(false);
   const location = useLocation();
+  const [displayAddComponent, setDisplayAddComponent] = useState(false);
   let title = "";
 
   switch (location.pathname) {
@@ -34,6 +36,9 @@ const Navbar = () => {
     setMobileClick(!mobileClick);
   };
 
+  const showAddComponents = () => {
+    setDisplayAddComponent(!displayAddComponent);
+  };
   return (
     <div>
       <nav className=" navbar navbar-expand-lg" id="home-navbar">
@@ -53,9 +58,9 @@ const Navbar = () => {
           {/* ----------------Navigation for mobile--------------------- */}
 
           <div id="add-expense">
-            <a href="/add-expense">
-              <img src="/img/phone-img/add-expense.png" alt="add" />
-            </a>
+            <button onClick={showAddComponents} id="add-expense-button">
+              +{" "}
+            </button>
           </div>
 
           {/* --------------------------------------------------- */}
@@ -110,6 +115,9 @@ const Navbar = () => {
       </nav>
 
       {mobileClick && <ResponsiveNavbar onHandleNavbar={showMobileNavbar} />}
+      {displayAddComponent && (
+        <AddComponent showAddComponents={showAddComponents} />
+      )}
     </div>
   );
 };

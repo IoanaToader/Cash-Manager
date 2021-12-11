@@ -73,6 +73,26 @@
   }
   #add-expense {
     display: inline;
+    position: fixed;
+    top: 83%;
+    left: 75%;
+  }
+  #add-expense-button {
+    position: fixed;
+    top: 88%;
+    left: 80%;
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 25px;
+    background: linear-gradient(
+      0deg,
+      rgba(94, 240, 160, 1) 0%,
+      rgba(17, 149, 39, 1) 85%
+    );
+    color: white;
+    border-color: rgba(94, 240, 160, 1);
   }
   /* -----------------Navbar elements--------------- */
 

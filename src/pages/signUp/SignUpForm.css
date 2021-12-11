@@ -6,3 +6,7 @@
 .login_form .login_form_elements .input-error:focus {
   box-shadow: none;
 }
+.login-sign-in {
+  color: white;
+  text-decoration-line: none;
+}

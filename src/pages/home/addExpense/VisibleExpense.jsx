@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import FadeIn from "react-fade-in/lib/FadeIn";
 import { UserContext } from "../../../contexts/UserContext";
+import "./VisibleExpense.css";
 
 const VisibleExpense = ({ delay, show }) => {
   const userContext = useContext(UserContext);
@@ -25,25 +26,49 @@ const VisibleExpense = ({ delay, show }) => {
   };
 
   const expense =
-    userContext.data.expenses[userContext.data.expenses.length - 1];
-
-  const handleRemoveExpense = (expense) => {
-    userContext.methods.removeExpense(expense);
-  };
+    userContext.data?.expenses[userContext.data?.expenses.length - 1];
 
   return (
     visible && (
       <>
         <FadeIn>
-          <li className="overviewItem-li">
-            <div date={expense.date}></div>
+          <div style={{ textAlign: "center", marginTop: "1rem" }}>
+            <li className="visible-expense-item">
+              {expense !== null &&
+              expense !== undefined &&
+              Object.keys(expense) ? (
+                <>
+                  <div
+                    style={{
+                      width: "-webkit-fill-available",
+                      textAlign: "center",
+                    }}
+                  >
+                    <div>{expense?.expenseCategory?.name}</div>
+                    <div style={{ marginTop: "-5px", fontSize: "15px" }}>
+                      ({expense?.expenseSubcategory?.name})
+                    </div>
+                  </div>
 
-            <div>
-              <h2>{expense.expenseTitle}</h2>
-              <div>${expense.amount}</div>
-              <div onClick={() => handleRemoveExpense(expense)}>x</div>
-            </div>
-          </li>
+                  <div
+                    style={{
+                      alignSelf: "center",
+                      width: "-webkit-fill-available",
+                      textAlignLast: "end",
+                    }}
+                  >
+                    <div>
+                      {" "}
+                      <span>{expense?.amount}</span>
+                      <span> {expense?.curreny}</span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                "It's not working !"
+              )}
+            </li>
+          </div>
         </FadeIn>
       </>
     )
