@@ -42,7 +42,11 @@ const CategoriesItem = () => {
       </div>
 
       {isSubcategoryVisible && userContext.data.subcategories && (
-        <div onClick={toggleSubcategoryVisible} style={{ width: "100%" }}>
+        <div
+          onClick={toggleSubcategoryVisible}
+          id="overlay"
+          style={{ width: "100%" }}
+        >
           <div className="subcategories-full-page">
             <ul className="subcategories-ul">
               {userContext.data?.subcategories?.map((subcategory, idx) => (

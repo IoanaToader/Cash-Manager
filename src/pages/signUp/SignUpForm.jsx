@@ -130,9 +130,9 @@ const SignUpForm = (props) => {
           <div className="error-message">{errors.usernameError}</div>
         )}
 
-        {userContext.data.signUpUsernameErrorMessage && (
+        {/* {userContext.data.signUpUsernameErrorMessage && (
           <div>{userContext.data.signUpUsernameErrorMessage}</div>
-        )}
+        )} */}
 
         <input
           value={password}
@@ -166,9 +166,9 @@ const SignUpForm = (props) => {
         {errors.emailError && (
           <div className="error-message">{errors.emailError}</div>
         )}
-        {userContext.data.signUpEmailErrorMessage && (
+        {/* {userContext.data.signUpEmailErrorMessage && (
           <div>{userContext.data.signUpEmailErrorMessage}</div>
-        )}
+        )} */}
 
         <button
           className="login_button"

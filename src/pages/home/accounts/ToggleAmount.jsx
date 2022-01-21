@@ -14,8 +14,6 @@ const ToggleAmount = (props) => {
   };
 
   const handleAmount = () => {
-    console.log(Number(account.amount) + Number(enteredNewAmount));
-
     if (action === "add") {
       account.amount = Number(account.amount) + Number(enteredNewAmount);
       userContext.data.accountsBalance[account.id] =

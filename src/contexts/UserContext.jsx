@@ -387,8 +387,8 @@ const UserContextProvider = (props) => {
       .catch((error) => {
         setValue({
           ...value,
-          signUpUsernameErrorMessage: "Username is already taken!",
-          signUpEmailErrorMessage: "Email is already taken!",
+          // signUpUsernameErrorMessage: "Username is already taken!",
+          // signUpEmailErrorMessage: "Email is already taken!",
         });
       });
   };
